@@ -14,7 +14,7 @@ Conductance = 'S';
 Capacitance = 'PikoF';
 Inductance = 'NanoH';
 
-CstDefineUnits(mws, Geometry, Frequency, Time, TemperatureUnit, Voltage, Current, Resistance, Conductance, Capacitance, Inductance);
+CstDefineUnits(mws,Geometry, Frequency, Time, TemperatureUnit, Voltage, Current, Resistance, Conductance, Capacitance, Inductance);
 ComponentList = 'component1';
 CstDefineFrequencyRange(mws, 25, 35);
 CstMeshInitiator(mws);
@@ -51,27 +51,27 @@ t_cu = 0.035;
 Name = 'Substrate';
 component = 'component1';
 material = 'FR-4 (lossy)';
-Xrange = [-l/2, l/2];  % unidade em mm, correspondente a lambda
-Yrange = [-l/2, l/2];
-Zrange = [0, t_s];  % espessura do substrato t_s
+Xrange = [-l/2 l/2];  % unidade em mm, correspondente a lambda
+Yrange = [-l/2 l/2];
+Zrange = [0 t_s];  % espessura do substrato t_s
 Cstbrick(mws, Name, component, material, Xrange, Yrange, Zrange);
 
 % definindo o anel de cobre
 Name = 'Ring';
 component = 'component1';
 material = 'Copper (annealed)';
-Xrange = [-p/2, p/2];  % margem considerando p/2 em torno do anel
-Yrange = [-p/2, p/2];
-Zrange = [t_s, t_s+t_cu];  % espessura de cobre t_Cu
+Xrange = [-p/2 p/2];  % margem considerando p/2 em torno do anel
+Yrange = [-p/2 p/2];
+Zrange = [t_s t_s+t_cu];  % espessura de cobre t_Cu
 Cstbrick(mws, Name, component, material, Xrange, Yrange, Zrange);
 
 % cortando o interior do anel
 Name = 'innercut';
 component = 'component1';
 material = 'Copper (annealed)';
-Xrange = [(-p/2)+w, (p/2)-w]; % interior do anel considerando largura w
-Yrange = [(-p/2)+w, (p/2)-w];
-Zrange = [t_s, t_s+t_cu];
+Xrange = [(-p/2)+w (p/2)-w]; % interior do anel considerando largura w
+Yrange = [(-p/2)+w (p/2)-w];
+Zrange = [t_s t_s+t_cu];
 Cstbrick(mws, Name, component, material, Xrange, Yrange, Zrange);
 
 component1 = 'component1:Ring';
@@ -80,21 +80,21 @@ CstSubtract(mws, component1, component2);
 
 % configurando as portas de entrada e saída
 PortNumber = 1;
-Xrange = [0, 0];
-Yrange = [0, 4.6];
-Zrange = [-5035, 6635];
-XrangeAdd = [0, 0];
-YrangeAdd = [0, 0];
-ZrangeAdd = [0, 0];
+Xrange = [0 0];
+Yrange = [0 4.6];
+Zrange = [-5035 6635];
+XrangeAdd = [0 0];
+YrangeAdd = [0 0];
+ZrangeAdd = [0 0];
 CstWaveguidePort(mws, PortNumber, Xrange, Yrange, Zrange, XrangeAdd, YrangeAdd, ZrangeAdd, 'Full', 'xmin');
 
 PortNumber = 2;
-Xrange = [4.6, 4.6];
-Yrange = [0, 4.6];
-Zrange = [-5035, 6635];
-XrangeAdd = [0, 0];
-YrangeAdd = [0, 0];
-ZrangeAdd = [0, 0];
+Xrange = [4.6 4.6];
+Yrange = [0 4.6];
+Zrange = [-5035 6635];
+XrangeAdd = [0 0];
+YrangeAdd = [0 0];
+ZrangeAdd = [0 0];
 CstWaveguidePort(mws, PortNumber, Xrange, Yrange, Zrange, XrangeAdd, YrangeAdd, ZrangeAdd, 'Full', 'xmax');
 
 CstSaveProject(mws);
